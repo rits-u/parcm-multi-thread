@@ -1,24 +1,81 @@
-#include <SFML/Graphics.hpp>
+#include <iostream>
+#include "BaseRunner.h"
+int main() {
+	BaseRunner runner;
+	runner.run();
 
-int main()
-{
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
-
-    return 0;
+	return 0;
 }
+ 
+
+
+
+
+
+
+//#include <iostream>
+//#include "IETThread.h"
+//
+//bool hasFood = false;
+//bool hasOrder = false;
+//
+//class Escoffier : public IETThread {
+//public:
+//	void Cook() {
+//		while (!hasOrder) {
+//		}
+//		std::cout << "Escoffier cooks\n";
+//		hasFood = true;
+//	}
+//
+//	void Enter() {
+//		std::cout << "Escoffier enters\n";
+//	}
+//
+//	void run() override {
+//		Enter();
+//		Cook();
+//	}
+//};
+//
+//class Furina : public IETThread {
+//public:
+//	void Order() {
+//		std::cout << "Furina orders\n";
+//		hasOrder = true;
+//	}
+//
+//	void WaitForFood() {
+//		while (!hasFood) {
+//			std::cout << "Furina waiting\n";
+//		}
+//	}
+//
+//	void Eat() {
+//		hasFood = false;
+//		std::cout << "Furina eats\n";
+//	}
+//
+//	void Enter() {
+//		std::cout << "Furina enters\n";
+//	}
+//
+//	void run() override {
+//		Enter();
+//		Order();
+//		WaitForFood();
+//		Eat();
+//	}
+//};
+//
+//int main() {
+//	Escoffier esc;
+//	Furina furina;
+//
+//	esc.start();
+//	furina.start();
+//
+//	IETThread::sleep(1000);
+//
+//	return 0;
+//}
