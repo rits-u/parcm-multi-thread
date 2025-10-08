@@ -6,10 +6,16 @@ LoadAssetThread::LoadAssetThread(int id, IExecutionEvent* callback)
 	this->OnFinished = callback;
 }
 
-void LoadAssetThread::run()
+void LoadAssetThread::OnStartTask()
 {
 	TextureManager::getInstance()->loadSingleStreamAsset(this->id);
 	this->OnFinished->OnFinishedExecution();
-
-	delete this;
 }
+//
+//void LoadAssetThread::run()
+//{
+//	TextureManager::getInstance()->loadSingleStreamAsset(this->id);
+//	this->OnFinished->OnFinishedExecution();
+//
+//	delete this;
+//}

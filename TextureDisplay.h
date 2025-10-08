@@ -7,7 +7,10 @@
 class IconObject;
 /// <summary>
 /// Class that deals with displaying of streamed textures
-/// </summary>
+/// </summary> 
+
+#include "ThreadPool.h"
+
 class TextureDisplay: public AGameObject, public IExecutionEvent
 {
 public:
@@ -22,8 +25,11 @@ private:
 	typedef std::vector<IconObject*> IconList;
 	IconList iconList;
 
+	//create a thread pool that has only 1 worker thread
+	ThreadPool threadPool = ThreadPool(2);
+
 	enum StreamingType { BATCH_LOAD = 0, SINGLE_STREAM = 1 };
-	const float STREAMING_LOAD_DELAY = 2000.0f;
+	const float STREAMING_LOAD_DELAY = 50.0f;
 	const StreamingType streamingType = SINGLE_STREAM;
 	float ticks = 0.0f;
 	bool startedStreaming = false;

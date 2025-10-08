@@ -11,7 +11,7 @@ TextureDisplay::TextureDisplay(): AGameObject("TextureDisplay")
 
 void TextureDisplay::initialize()
 {
-	
+	this->threadPool.StartScheduling();
 }
 
 void TextureDisplay::processInput(sf::Event event)
@@ -31,7 +31,7 @@ void TextureDisplay::update(sf::Time deltaTime)
 
 	// spawn new icon every 5 seconds
 	if (this->ticks >= STREAMING_LOAD_DELAY) {
-		this->ticks = 0;
+
 		int texCount = TextureManager::getInstance()->getNumLoadedStreamTextures();
 		//
 		////int streamIndex = this->iconList.size(); // use how many we spawned so far
@@ -48,7 +48,8 @@ void TextureDisplay::update(sf::Time deltaTime)
 					/*TextureManager::getInstance()->loadSingleStreamAsset(texCount);
 					this->spawnObject();*/
 					LoadAssetThread* asset = new LoadAssetThread(texCount, this);
-					asset->start();
+					//asset->start();
+					this->threadPool.ScheduleTasks(asset);
 				}
 				break;
 
@@ -61,6 +62,8 @@ void TextureDisplay::update(sf::Time deltaTime)
 				}
 				break;
 		}
+
+		this->ticks = 0;
 		
 	}
 }
